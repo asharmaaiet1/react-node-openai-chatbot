@@ -74,10 +74,6 @@ Backend will start on `http://localhost:9090`
 npm start
 ```
 
-Ftart
-
-```
-
 The frontend will open at `http://localhost:3000`
 
 ## Project Structure
@@ -111,21 +107,23 @@ my-chatbot/
 ├── package.json # Dependencies and npm scripts
 └── README.md # This file
 
-````
+```
 
 ## API Endpoints
 
 ### REST Endpoint
 
 **POST** `/api/chat`
+
 - Send a message and get a response
 - Request body:
+
   ```json
   {
     "message": "Hello!",
     "history": []
   }
-````
+  ```
 
 - Response:
   ```json
@@ -194,3 +192,7 @@ For full-stack development, run both servers simultaneously in separate terminal
 ## License
 
 This project is private. All rights reserved.
+
+```
+
+```
