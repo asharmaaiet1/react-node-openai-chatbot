@@ -1,5 +1,9 @@
 {
   "name": "my-chatbot",
+  "author": {
+    "name": "Abhishek",
+    "email": "asharmaaiet@hotmail.com"
+  },
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:9090",
