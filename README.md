@@ -1,70 +1,137 @@
-# Getting Started with Create React App
+# My Chatbot
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack chatbot application built with React and Node.js/Express, powered by OpenAI's LLM API.
+
+## Project Overview
+
+This project is a modern web-based chatbot that combines:
+
+- **Frontend**: React-based user interface with styled components
+- **Backend**: Express.js server handling API requests
+- **AI Integration**: OpenAI integration for intelligent responses
+
+## Prerequisites
+
+Before you begin, ensure you have the following installed on your system:
+
+- **Node.js** (v14.0.0 or higher) - [Download](https://nodejs.org/)
+- **npm** (comes with Node.js)
+- **OpenAI API Key** - Get one from [OpenAI Platform](https://platform.openai.com/api-keys)
+
+## Installation
+
+1. **Clone or navigate to the project directory:**
+
+   ```bash
+   cd my-chatbot
+   ```
+
+2. **Install dependencies:**
+
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables:**
+   Create a `.env` file in ./server and add your OpenAI API key:
+   ```
+   PORT=9090
+   OPENAI_API_KEY=your_api_key_here
+   MODEL=gpt-4o-mini
+   ```
+
+## Running the Application
+
+The application runs in two parts: frontend and backend. You have two options:
+
+### Option 1: Run Frontend Only (Development)
+
+The frontend will proxy API requests to the backend at `http://localhost:9090`.
+
+```bash
+npm start
+```
+
+The React app will open in your browser at `http://localhost:3000`
+
+### Option 2: Run Both Frontend and Backend (Recommended)
+
+In one terminal, start the backend server:
+
+```bash
+node server.js
+```
+
+The backend will start on `http://localhost:9090`
+
+In another terminal, start the frontend:
+
+```bash
+npm start
+```
+
+The frontend will open at `http://localhost:3000`
+
+## Project Structure
+
+```
+my-chatbot/
+├── public/                 # Static files
+│   ├── index.html
+│   ├── manifest.json
+│   └── robots.txt
+├── server/                 # Backend code
+│   └── src/
+│       ├── index.js        # Server entry point (alternative)
+│       ├── routes/
+│       │   └── chat.js     # Chat endpoints
+│       ├── services/
+│       │   └── llm.js      # LLM service integration
+│       ├──.env             # Environment file for Node
+├── src/                    # Frontend React code
+│   ├── App.js              # Main React component
+│   ├── App.css
+│   ├── index.js            # React entry point
+│   ├── api/
+│   │   └── index.js        # API client utilities
+│   └── ...
+├── server.js               # Express server entry point
+├── package.json            # Dependencies and scripts
+└── README.md               # This file
+```
 
 ## Available Scripts
 
-In the project directory, you can run:
+- `npm start` - Start the React development server (port 3000)
+- `npm build` - Build the React app for production
+- `npm test` - Run tests
+- `node server.js` - Start the Express backend server (port 9090)
 
-### `npm start`
+## API Endpoints
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The backend provides chat functionality:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **POST** `/api/chat` - Send a message to the chatbot and get a response
 
-### `npm test`
+## Technology Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Frontend**: React 19, Styled Components, Axios
+- **Backend**: Express.js 5
+- **AI**: OpenAI API
+- **Testing**: React Testing Library, Jest
+- **Utilities**: dotenv for environment variables, CORS for cross-origin requests
 
-### `npm run build`
+## Troubleshooting
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Port 3000 already in use**: Change the port in development or kill the process using `lsof -i :3000` (macOS/Linux) or `netstat -ano` (Windows)
+- **Port 9090 already in use**: Modify `SERVER_PORT` in `server.js`
+- **API Key not working**: Verify your OpenAI API key is correctly set in the `.env` file
+- **CORS errors**: Ensure the backend is running and the proxy in `package.json` is set correctly
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Development
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+For full-stack development, run both servers simultaneously in separate terminals for a seamless development experience.
 
-### `npm run eject`
+## License
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is private. All rights reserved.
