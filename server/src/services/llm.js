@@ -43,7 +43,7 @@ export async function* streamChatReply(prompt, history = []) {
     // ...history,
     { role: "user", content: prompt },
   ];
-  // controls the sampling randomness when the model generates tokens.
+  // Controls the sampling randomness when the model generates tokens.
   // The code sends temperature: 0.7 to make outputs moderately creative but not wildly random.
   const stream = await openai.chat.completions.create({
     model: MODEL,

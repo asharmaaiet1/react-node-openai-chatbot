@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useTheme } from "./context/ThemeContext";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import {
   Container,
   Panel,
@@ -10,6 +12,7 @@ import {
   Messages,
   Bubble,
   InputRow,
+  StatusIndicator,
 } from "./components/styles";
 
 const API_BASE = "http://localhost:9090/api";
@@ -19,7 +22,7 @@ export default function App() {
   const [messages, setMessages] = useState([
     {
       role: "assistant",
-      content: "Hi! I am your AI chatbot. How can I help today?",
+      content: "Hi! I am your AI assistant. How can I help today?",
     },
   ]);
   const [input, setInput] = useState("");
@@ -92,11 +95,11 @@ export default function App() {
         acc += payload.token;
         setMessages((prev) => {
           const updated = [...prev];
-          const last = updated[updated.length - 1];
-          if (!last || last.role !== "assistant") {
+          const last = updated.at(-1);
+          if (last?.role !== "assistant") {
             return [...updated, { role: "assistant", content: acc }];
           } else {
-            updated[updated.length - 1] = { role: "assistant", content: acc };
+            updated.splice(-1, 1, { role: "assistant", content: acc });
             return updated;
           }
         });
@@ -144,9 +147,13 @@ export default function App() {
     <Container theme={currentTheme}>
       <Panel theme={currentTheme}>
         <Header theme={currentTheme}>
-          <h1>Sample Chatbot using React and Node with SEE</h1>
+          <h1>
+            Sample Chatbot using React and Node with SSE(Server Sent Events)
+          </h1>
           <HeaderContent>
-            <Meta theme={currentTheme}>{loading ? "Working..." : "Ready"}</Meta>
+            <Meta theme={currentTheme}>
+              <StatusIndicator $isLoading={loading} />
+            </Meta>
             <ThemeToggleBtn
               onClick={toggleTheme}
               theme={currentTheme}
@@ -164,7 +171,12 @@ export default function App() {
               $isUser={m.role === "user"}
               theme={currentTheme}
             >
-              {m.content}
+              {/* {m.content} */}
+              <div style={{ whiteSpace: "pre-wrap" }}>
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {m.content}
+                </ReactMarkdown>
+              </div>
             </Bubble>
           ))}
         </Messages>

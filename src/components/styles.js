@@ -6,7 +6,7 @@ export const Container = styled.div`
   align-items: center;
   min-height: calc(100vh - 40px);
   background: ${(props) => props.theme.containerBg};
-  padding: 20px;
+  // padding: 20px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -18,10 +18,10 @@ export const Panel = styled.div`
   flex-direction: column;
   width: 100%;
   max-width: 600px;
-  height: 80vh;
+  height: 100vh;
   max-height: 800px;
   background: ${(props) => props.theme.panelBg};
-  border-radius: 12px;
+  // border-radius: 12px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   overflow: hidden;
   transition: background 0.3s ease;
@@ -76,14 +76,22 @@ export const Meta = styled.span`
   font-weight: 500;
   opacity: 0.9;
   background: rgba(255, 255, 255, 0.2);
-  padding: 4px 12px;
+  padding: 4px 4px;
   border-radius: 20px;
   white-space: nowrap;
+`;
+
+export const StatusIndicator = styled.div`
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: ${(props) => (props.$isLoading ? "red" : "green")};
 `;
 
 export const Messages = styled.div`
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -110,12 +118,13 @@ export const Messages = styled.div`
 `;
 
 export const Bubble = styled.div`
-  padding: 12px 16px;
+  padding: 0px 10px;
   border-radius: 12px;
   word-wrap: break-word;
   line-height: 1.5;
   font-size: 14px;
-  max-width: 80%;
+  min-width: 80%;
+  max-width: 99%;
   align-self: ${(props) => (props.$isUser ? "flex-end" : "flex-start")};
   background: ${(props) =>
     props.$isUser ? props.theme.userBubbleBg : props.theme.botBubbleBg};
